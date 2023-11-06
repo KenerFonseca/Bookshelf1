@@ -1,0 +1,20 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape>
+            <solid android:color="#FFA500" /> <!-- Color de fondo cuando está seleccionado -->
+            <corners android:radius="4dp" /> <!-- Bordes redondeados (ajusta el radio según tus preferencias) -->
+            <stroke
+                android:width="2dp"
+            android:color="#FFA500" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="@color/white" /> <!-- Color de fondo predeterminado -->
+            <corners android:radius="4dp" /> <!-- Bordes redondeados (ajusta el radio según tus preferencias) -->
+            <stroke
+                android:width="2dp"
+            android:color="#000000" /> <!-- Color del borde predeterminado -->
+        </shape>
+    </item>
+</selector>
