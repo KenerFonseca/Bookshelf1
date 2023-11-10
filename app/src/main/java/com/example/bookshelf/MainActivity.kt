@@ -22,14 +22,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-data class Book(
+data class Book( //Se define una clase para representar el libro
     val title: String,
     val authors: List<String>,
     val description: String,
     val imageUrl: String
 )
 
-data class GoogleBooksResponse(
+data class GoogleBooksResponse( //Se define datos para mapear las respuesta de la api
     val items: List<BookItem>
 )
 
@@ -47,7 +47,7 @@ data class VolumeInfo(
 data class ImageLinks(
     val thumbnail: String
 )
-
+//Se define la interfaz del servicio de goolgle para los libros por medio de retrofit(Para solicitudes de api)
 interface GoogleBooksService {
     @GET("volumes")
     suspend fun searchBooks(
@@ -56,7 +56,7 @@ interface GoogleBooksService {
     ): Response<GoogleBooksResponse>
 }
 
-object RetrofitClient {
+object RetrofitClient { //Se define un objeto singloton para crear instancias del servicio retrofict
     private const val BASE_URL = "https://www.googleapis.com/books/v1/"
 
     fun createService(): GoogleBooksService {
@@ -67,7 +67,7 @@ object RetrofitClient {
         return retrofit.create(GoogleBooksService::class.java)
     }
 }
-
+//actividad principal
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         val query = "android"  // Personaliza la consulta de búsqueda
         val maxResults = 10  // Personaliza el número máximo de resultados
 
-        try {
+        try { //try catch para el manejo de errores
             val response = service.searchBooks(query, maxResults)
             if (response.isSuccessful) {
                 val googleBooksResponse = response.body()
@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
+// para el adaptador del reclerView que muestre la lista de los libro
 class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
     // Variable para rastrear el estado actual (imagen visible o texto visible)
@@ -140,7 +140,7 @@ class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdap
             book.imageUrl
         }
 
-        // Configura las vistas con los datos del libro y carga la imagen desde la URL
+        // Configucion de las vistas con los datos del libro y carga la imagen desde la URL
         Picasso.get().load(imageUrl).into(holder.coverImageView, object : Callback {
             override fun onSuccess() {
                 Log.d("Picasso", "Image loaded successfully")
